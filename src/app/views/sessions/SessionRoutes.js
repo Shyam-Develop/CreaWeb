@@ -18,6 +18,8 @@ const JoinUS = Loadable(lazy(() => import('./JoinUS')));
 const CountyIND = Loadable(lazy(() => import('./CountryIndustry')));
 const EnterYourOTP = Loadable(lazy(() => import('./EnterYourOTP')));
 const ResetPassSucces = Loadable(lazy(() => import('./ResetPassSucces')));
+const CreaLoadPage = Loadable(lazy(() => import('./CreaLoadPage')));
+
 
 
 
@@ -41,6 +43,8 @@ const sessionRoutes = [
  {path:"/session/country-industry" ,element:<CountyIND/>},
  {path:"/session/enter-your-otp" ,element:<EnterYourOTP/>},
  {path:"/session/reset-pass-succes" ,element:<ResetPassSucces/>},
+ {path:"/session/crea-load-page" ,element:<CreaLoadPage/>},
+
 
 
 
