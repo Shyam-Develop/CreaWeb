@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import backgroundImage from '/../MAHE/CreaWeb/src/assets/pict.jpg'
+import backgroundImage from '../../../assets/pict.jpg'
 
 const Explore = () => {
     const navigate = useNavigate();

@@ -20,10 +20,11 @@ const EnterYourOTP = Loadable(lazy(() => import('./EnterYourOTP')));
 const ResetPassSucces = Loadable(lazy(() => import('./ResetPassSucces')));
 const CreaLoadPage = Loadable(lazy(() => import('./CreaLoadPage')));
 
+const ConnectLoad = Loadable(lazy(() => import('./ConnectLoadPage')));
 
+const DiscoverLoad = Loadable(lazy(() => import('./DiscoverLoadPage')));
 
-
-
+const ExploreLoad = Loadable(lazy(() => import('./ExploreLoadPage')));
 
 const sessionRoutes = [
   { path: '/session/signup', element: <JwtRegister /> },
@@ -44,7 +45,9 @@ const sessionRoutes = [
  {path:"/session/enter-your-otp" ,element:<EnterYourOTP/>},
  {path:"/session/reset-pass-succes" ,element:<ResetPassSucces/>},
  {path:"/session/crea-load-page" ,element:<CreaLoadPage/>},
-
+ {path:"/crea/on-boarding" ,element:<ConnectLoad/>},
+ {path:"/session/crea-discover" ,element:<DiscoverLoad/>},
+ {path:"/session/crea-explore" ,element:<ExploreLoad/>},
 
 
 

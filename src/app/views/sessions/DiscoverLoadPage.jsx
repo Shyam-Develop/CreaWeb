@@ -6,7 +6,7 @@ const Discover = () => {
     const navigate = useNavigate();
 
     const handleNext = () => {
-        navigate('/explore');
+        navigate('/session/crea-explore');
     };
 
     return (

@@ -8,7 +8,7 @@ const CreaScreen = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/on-boarding"); 
+      navigate("/crea/on-boarding"); 
     }, 2000);
 
     return () => clearTimeout(timer);

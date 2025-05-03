@@ -35,7 +35,8 @@ const routes = [
       ],
     },
     ...sessionRoutes,
-    { path: '/', element: <Navigate to="/session/signin" /> },
+    // { path: '/', element: <Navigate to="/session/signin" /> },
+    { path: '/', element: <Navigate to="/session/crea-load-page" /> },
     { path: '*', element: <NotFound /> },
 
 

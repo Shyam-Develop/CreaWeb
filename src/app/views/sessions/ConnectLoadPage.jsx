@@ -6,7 +6,7 @@ const OnboardingScreen = () => {
     const navigate = useNavigate();
 
     const handleNext = () => {
-        navigate('/discover');
+        navigate('/session/crea-discover');
     };
 
     return (
