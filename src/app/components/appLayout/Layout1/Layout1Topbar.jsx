@@ -50,7 +50,7 @@ const TopbarRoot = styled("div")(({ theme }) => ({
   zIndex: 96,
   transition: "all 0.3s ease",
   boxShadow: themeShadows[8],
-  height: 200,
+  height: 150,
 }));
 
 const TopbarContainer = styled(Box)(({ theme }) => ({

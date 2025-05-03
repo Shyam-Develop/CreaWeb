@@ -5,14 +5,14 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import FolderIcon from '@mui/icons-material/Folder';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { authRoles } from './auth/authRoles';
-
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 export const navigations = [
   { 
     name: 'My Account', 
     path: '/pages/view-price-book', 
     iconText: 'V', 
     accessID: "TR010", 
-    icon: <DescriptionIcon fontSize='small'/>,
+    icon: <AccountBoxIcon color="green" fontSize='small'/>,
     role: authRoles.user 
   },
   { 

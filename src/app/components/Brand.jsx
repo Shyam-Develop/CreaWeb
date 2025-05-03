@@ -4,7 +4,7 @@ import useSettings from "app/hooks/useSettings";
 import { Span } from "./Typography";
 import { Link } from "react-router-dom";
 import useAuth from "app/hooks/useAuth";
-
+import Crea from "../../assets/logo.jpg"
 const BrandRoot = styled(Box)(() => ({
     display: 'flex',
     alignItems: 'center',
@@ -28,9 +28,9 @@ const BrandRoot = styled(Box)(() => ({
       <BrandRoot>
           <Link to={"/home"}>
         <Box display="flex" alignItems="center" >
-          <img src={user.company == "Plymouth" ? "/assets/images/logo.png": user.company == "Nicky" ? "/assets/images/nicky.png"  : "/assets/images/sjfood.png"} height={50}  style={{ objectFit: "cover"}}/>
+          <img src={Crea} height={50}  style={{ objectFit: "cover"}}/>
           <StyledSpan mode={mode} className="sidenavHoverShow">
-            {user.company}
+            {"CREA"}
           </StyledSpan>
         </Box>
           </Link>

@@ -20,7 +20,7 @@ const BottomBarRoot = styled("div")(({ theme, sidebarwidth }) => ({
   right: 0,
   zIndex: 96,
   transition: "all 0.3s ease",
-  height: topBarHeight,
+  height:50,
 }));
 
 const Layout1SecondaryBottomBar = () => {
@@ -65,7 +65,7 @@ const Layout1SecondaryBottomBar = () => {
           borderColor: "divider",
           bgcolor: "#fff",
           zIndex: 10,
-          height: topBarHeight,
+          height: 50,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
