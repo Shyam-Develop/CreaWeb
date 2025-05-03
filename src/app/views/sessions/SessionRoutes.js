@@ -16,6 +16,13 @@ const UploadGovID = Loadable(lazy(() => import('./UploadGovId')));
 const UploadUID = Loadable(lazy(() => import('./UploadUid')));
 const JoinUS = Loadable(lazy(() => import('./JoinUS')));
 const CountyIND = Loadable(lazy(() => import('./CountryIndustry')));
+const EnterYourOTP = Loadable(lazy(() => import('./EnterYourOTP')));
+const ResetPassSucces = Loadable(lazy(() => import('./ResetPassSucces')));
+
+
+
+
+
 const sessionRoutes = [
   { path: '/session/signup', element: <JwtRegister /> },
   { path: '/session/signin', element: <JwtLogin /> },
@@ -32,6 +39,13 @@ const sessionRoutes = [
  {path:"/session/uploadgov-id" ,element:<UploadUID/>},
  {path:"/session/join-us" ,element:<JoinUS/>},
  {path:"/session/country-industry" ,element:<CountyIND/>},
+ {path:"/session/enter-your-otp" ,element:<EnterYourOTP/>},
+ {path:"/session/reset-pass-succes" ,element:<ResetPassSucces/>},
+
+
+
+
+
 ];
 
 export default sessionRoutes;

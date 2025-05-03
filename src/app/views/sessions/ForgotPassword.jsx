@@ -1,143 +1,99 @@
-import { Box, Button, Card, Grid, styled, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-
-const FlexBox = styled(Box)(() => ({
-  display: "flex",
-  alignItems: "center",
-}));
-
-const JustifyBox = styled(FlexBox)(() => ({
-  justifyContent: "center",
-  display: "flex",
-  flexDirection: "column",
-  gap: "10px",
-}));
-const StyledRoot = styled("div")(() => ({
-  backgroundImage: `url(/assets/images/meat1.jpg)`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  // backgroundColor: "#1A2038",
-  backgroundSize: "cover", // Cover the whole container
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center center",
-  minHeight: "100% !important",
-  "& .card": {
-    maxWidth: 400,
-    minHeight: 400,
-    margin: "1rem",
-    display: "flex",
-    borderRadius: 12,
-    alignItems: "center",
-  },
-
-  ".img-wrapper": {
-    height: "100%",
-    minWidth: 320,
-    display: "flex",
-    padding: "2rem 2rem 1rem 2rem",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-  },
-}));
-const ContentBox = styled(Box)(({ theme }) => ({
-  padding: 32,
-  background: theme.palette.background.default,
-}));
-
-// const ForgotPasswordRoot = styled(JustifyBox)(() => ({
-//   background: '#1A2038',
-//   minHeight: '100vh !important',
-//   '& .card': {
-//     maxWidth: 800,
-//     margin: '1rem',
-//     borderRadius: 12,
-//   },
-// }));
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("admin@example.com");
 
-  const handleFormSubmit = () => {
-    console.log(email);
+  const handleResetPassword = () => {
+    navigate("/session/enter-your-otp");
   };
 
   return (
-    <StyledRoot>
-      <Card className="card">
-        <Grid container>
-          <Grid item xs={12}>
-          <JustifyBox p={2}>
-                {/* <img width="300" src="/assets/illustrations/dreamer.svg" alt="" /> */}
-                <img
-                  src="/assets/images/logo.png"
-                  width="150px"
-                  height={"150px"}
-                  alt=""
-                />
-                <Typography
-               
-                  sx={{
-                    textAlign: "center",
-                    color: "#dd2c00",
-                    fontSize: { xs: "1.2rem", sm: "1.5rem", md: "1.75rem" },
-                  }}
-                >
-                  OTP
-                </Typography>
-              </JustifyBox>
+    <div
+      style={{
+        fontFamily: "sans-serif",
+        maxWidth: "480px",
+        margin: "0 auto",
+        padding: "16px",
+        minHeight: "100vh",
+        backgroundColor: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <h2 style={{ fontWeight: "600", color: "#1a1a1a" }}>Forgot Password</h2>
+      <p style={{ color: "#888", fontSize: "14px", marginTop: "-1px" }}>
+        Remember & input your email or
+      </p>
+      <p style={{ color: "#888", fontSize: "14px", marginTop: "-7px" }}>
+        phone number below
+      </p>
 
-            <ContentBox>
-              <form onSubmit={handleFormSubmit}>
-                <TextField
-                  type="email"
-                  name="email"
-                  size="small"
-                  label="Email"
-                  value={email}
-                  variant="outlined"
-                  onChange={(e) => setEmail(e.target.value)}
-                  sx={{ mb: 3, width: "100%" }}
-                />
-                <Button
-                  fullWidth
-                  sx={{
-                    backgroundColor: "#164D50",
-                    color: "white",
-                    "&:hover": {
-                      backgroundColor: "#164D50", // Custom hover color
-                    },
-                    // my: 2,
-                    width: "100%",
-                  }}
-                  onClick={() => navigate("/session/reset-password")}
-                  variant="contained"
-                >
-                  Send OTP
-                </Button>
+      <div style={{ marginBottom: "24px" }}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/747/747545.png"
+          alt="Lock Illustration"
+          style={{ width: "120px", height: "120px", objectFit: "contain" }}
+        />
+      </div>
 
-                <Button
-                  fullWidth
-                  onClick={() => navigate("/session/signin")}
-                  color="primary"
-                  sx={{
-                    mt: 2,
-                    width: "100%",
-                  }}
-                  // loading={loading}
-                  variant="contained"
-                >
-                  Go Back
-                </Button>
-              </form>
-            </ContentBox>
-          </Grid>
-        </Grid>
-      </Card>
-    </StyledRoot>
+      <div style={{ width: "100%", marginBottom: "24px" }}>
+        <label
+          htmlFor="email"
+          style={{ display: "block", marginBottom: "8px", textAlign: "left" }}
+        >
+          Email or Phone Number
+        </label>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            padding: "10px",
+          }}
+        >
+          <span role="img" aria-label="email" style={{ marginRight: "8px" }}>
+            📧
+          </span>
+          <input
+            id="email"
+            type="text"
+            placeholder="Hello@Zachry.com"
+            style={{
+              border: "none",
+              outline: "none",
+              flex: 1,
+              fontSize: "16px",
+            }}
+          />
+          <span role="img" aria-label="check" style={{ color: "#007bff" }}>
+            ✔️
+          </span>
+        </div>
+      </div>
+
+      <button
+        onClick={handleResetPassword}
+        style={{
+          backgroundColor: "#1a73e8",
+          color: "#fff",
+          border: "none",
+          borderRadius: "10px",
+          padding: "14px 0",
+          width: "100%",
+          fontSize: "16px",
+          fontWeight: "600",
+          boxShadow: "0 4px 8px rgba(26, 115, 232, 0.3)",
+          cursor: "pointer",
+        }}
+      >
+        Reset Password
+      </button>
+    </div>
   );
 };
 
