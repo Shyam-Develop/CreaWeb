@@ -10,6 +10,11 @@ const Layout1Settings = {
       fixed: false,
       theme: 'whiteBlue', // View all valid theme colors inside MatxTheme/themeColors.js
     },
+    footerbar: {
+      show: true,
+      fixed: false,
+      theme: 'whiteBlue', // View all valid theme colors inside MatxTheme/themeColors.js
+    },
   };
   
   export default Layout1Settings;

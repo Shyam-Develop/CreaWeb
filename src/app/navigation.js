@@ -9,7 +9,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 export const navigations = [
   { 
     name: 'My Account', 
-    path: '/pages/view-price-book', 
+    path: '/account/my-profile', 
     iconText: 'V', 
     accessID: "TR010", 
     icon: <AccountBoxIcon color="green" fontSize='small'/>,
@@ -40,7 +40,7 @@ export const navigations = [
   {
     name: 'Hiring Dashboard',
     icon: <FolderIcon fontSize='small'/>,
-    path: '/pages/hiring-dashboard',  // Added a path
+    path: '/hiring-dash-board',  // Added a path
     role: authRoles.admin 
   },
   { 

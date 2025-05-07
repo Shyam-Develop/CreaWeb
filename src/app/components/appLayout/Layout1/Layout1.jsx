@@ -34,7 +34,7 @@ const StyledScrollBar = styled(Scrollbar)(() => ({
   flexDirection: "column",
 }));
 
-const LayoutContainer = styled(Box)(({ width, secondarySidebar }) => ({
+const LayoutContainer = styled(Box)(({ width }) => ({
   height: "100vh",
   display: "flex",
   flexGrow: "1",
@@ -44,13 +44,14 @@ const LayoutContainer = styled(Box)(({ width, secondarySidebar }) => ({
   position: "relative",
   overflow: "hidden",
   transition: "all 0.3s ease",
-  // marginRight: secondarySidebar.open ? 50 : 0,
 }));
 
 const Layout1 = () => {
   const { settings, updateSettings } = useSettings();
   const { layout1Settings, secondarySidebar } = settings;
   const topbarTheme = settings.themes[layout1Settings.topbar.theme];
+  const footerbarTheme = settings.themes[layout1Settings.footerbar.theme];
+
   const {
     leftSidebar: { mode: sidenavMode, show: showSidenav },
   } = layout1Settings;
@@ -59,10 +60,8 @@ const Layout1 = () => {
     switch (sidenavMode) {
       case "full":
         return sideNavWidth;
-
       case "compact":
         return sidenavCompactWidth;
-
       default:
         return "0px";
     }
@@ -73,7 +72,7 @@ const Layout1 = () => {
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const ref = useRef({ isMdScreen, settings });
-  const layoutClasses = `theme-${theme.palette.type}`;
+  const layoutClasses = `theme-${theme.palette.mode}`;
 
   useEffect(() => {
     let { settings } = ref.current;
@@ -94,41 +93,42 @@ const Layout1 = () => {
       )}
 
       <LayoutContainer width={sidenavWidth} secondarySidebar={secondarySidebar}>
+        {/* Fixed Topbar */}
         {layout1Settings.topbar.show && layout1Settings.topbar.fixed && (
           <ThemeProvider theme={topbarTheme}>
-            <Layout1Topbar fixed={true} className="elevation-z8" />
-            {/* <Layout1Secondarytopbar fixed={true} className="elevation-z10" /> */}
-            {/* <Layout1FooterBar fixed={true} className="elevation-z8" /> */}
+            <Layout1Topbar fixed className="elevation-z8" />
           </ThemeProvider>
         )}
 
-        {settings.perfectScrollbar && (
+        {settings.perfectScrollbar ? (
           <StyledScrollBar>
+            {/* Non-Fixed Topbar */}
             {layout1Settings.topbar.show && !layout1Settings.topbar.fixed && (
               <ThemeProvider theme={topbarTheme}>
                 <Layout1Topbar />
-                {/* <Layout1FooterBar /> */}
-                {/* <Layout1Secondarytopbar/> */}
               </ThemeProvider>
             )}
 
+            {/* Page Content */}
             <Box flexGrow={1} position="relative">
               <AppSuspense>
                 <Outlet />
               </AppSuspense>
             </Box>
 
+            {/* Non-Fixed Footer */}
             {settings.footer.show && !settings.footer.fixed && <Footer />}
-          </StyledScrollBar>
-        )}
 
-        {!settings.perfectScrollbar && (
+            {/* Non-Fixed Secondary Bottom Bar */}
+            <ThemeProvider theme={footerbarTheme}>
+              <Layout1SecondaryBottomBar />
+            </ThemeProvider>
+          </StyledScrollBar>
+        ) : (
           <ContentBox>
             {layout1Settings.topbar.show && !layout1Settings.topbar.fixed && (
               <ThemeProvider theme={topbarTheme}>
                 <Layout1Topbar />
-                {/* <Layout1Secondarytopbar/> */}
-                {/* <Layout1FooterBar /> */}
               </ThemeProvider>
             )}
 
@@ -139,21 +139,207 @@ const Layout1 = () => {
             </Box>
 
             {settings.footer.show && !settings.footer.fixed && <Footer />}
+
+            <ThemeProvider theme={footerbarTheme}>
+              <Layout1SecondaryBottomBar />
+            </ThemeProvider>
           </ContentBox>
         )}
 
+        {/* Fixed Footer */}
         {settings.footer.show && settings.footer.fixed && <Footer />}
+
+        {/* Fixed Secondary Bottom Bar */}
+        <ThemeProvider theme={footerbarTheme}>
+          <Layout1SecondaryBottomBar fixed className="elevation-z6" />
+        </ThemeProvider>
       </LayoutContainer>
 
+      {/* Mail Sidebar */}
       {settings.secondarySidebar.show && <MailSidebar />}
-
-      {/* Add Layout1SecondaryBottomBar here */}
-      <Layout1SecondaryBottomBar />
     </Layout1Root>
   );
 };
 
 export default React.memo(Layout1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { ThemeProvider, useMediaQuery, Box, styled, useTheme } from "@mui/material";
+// import { AppSuspense } from "app/components";
+// import useSettings from "app/hooks/useSettings";
+// import { sidenavCompactWidth, sideNavWidth } from "app/utils/constant";
+// import React, { useEffect, useRef } from "react";
+// import Scrollbar from "react-perfect-scrollbar";
+// import { Outlet } from "react-router-dom";
+// import Footer from "app/components/Footer";
+// import SidenavTheme from "../../baseTheme/SidenavTheme/SidenavTheme";
+// import Layout1Sidenav from "./Layout1Sidenav";
+// import Layout1Topbar from "./Layout1Topbar";
+// import MailSidebar from "app/components/MailSidebar/MailSidebar";
+// import Layout1SecondaryBottomBar from "./Layout1FooterBar";
+
+// const Layout1Root = styled(Box)(({ theme }) => ({
+//   display: "flex",
+//   background: theme.palette.background.default,
+// }));
+
+// const ContentBox = styled(Box)(() => ({
+//   height: "100%",
+//   display: "flex",
+//   overflowY: "auto",
+//   overflowX: "hidden",
+//   flexDirection: "column",
+//   justifyContent: "space-between",
+// }));
+
+// const StyledScrollBar = styled(Scrollbar)(() => ({
+//   height: "100%",
+//   position: "relative",
+//   display: "flex",
+//   flexGrow: "1",
+//   flexDirection: "column",
+// }));
+
+// const LayoutContainer = styled(Box)(({ width, secondarySidebar }) => ({
+//   height: "100vh",
+//   display: "flex",
+//   flexGrow: "1",
+//   flexDirection: "column",
+//   verticalAlign: "top",
+//   marginLeft: width,
+//   position: "relative",
+//   overflow: "hidden",
+//   transition: "all 0.3s ease",
+//   // marginRight: secondarySidebar.open ? 50 : 0,
+// }));
+
+// const Layout1 = () => {
+//   const { settings, updateSettings } = useSettings();
+//   const { layout1Settings, secondarySidebar } = settings;
+//   const topbarTheme = settings.themes[layout1Settings.topbar.theme];
+//   const footerTheme = settings.themes[layout1Settings.footerbar.theme];
+//   const {
+//     leftSidebar: { mode: sidenavMode, show: showSidenav },
+//   } = layout1Settings;
+
+//   const getSidenavWidth = () => {
+//     switch (sidenavMode) {
+//       case "full":
+//         return sideNavWidth;
+
+//       case "compact":
+//         return sidenavCompactWidth;
+
+//       default:
+//         return "0px";
+//     }
+//   };
+
+//   const sidenavWidth = getSidenavWidth();
+//   const theme = useTheme();
+//   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+//   const ref = useRef({ isMdScreen, settings });
+//   const layoutClasses = `theme-${theme.palette.type}`;
+
+//   useEffect(() => {
+//     let { settings } = ref.current;
+//     let sidebarMode = settings.layout1Settings.leftSidebar.mode;
+//     if (settings.layout1Settings.leftSidebar.show) {
+//       let mode = isMdScreen ? "close" : sidebarMode;
+//       updateSettings({ layout1Settings: { leftSidebar: { mode } } });
+//     }
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [isMdScreen]);
+
+//   return (
+//     <Layout1Root className={layoutClasses}>
+//       {showSidenav && sidenavMode !== "close" && (
+//         <SidenavTheme>
+//           <Layout1Sidenav />
+//         </SidenavTheme>
+//       )}
+
+//       <LayoutContainer width={sidenavWidth} secondarySidebar={secondarySidebar}>
+//         {layout1Settings.topbar.show && layout1Settings.topbar.fixed && (
+//           <ThemeProvider theme={topbarTheme}>
+//             <Layout1Topbar fixed={true} className="elevation-z8" />
+//             {/* <Layout1Secondarytopbar fixed={true} className="elevation-z10" /> */}
+//             {/* <Layout1FooterBar fixed={true} className="elevation-z8" /> */}
+//           </ThemeProvider>
+//         )}
+
+//         {settings.perfectScrollbar && (
+//           <StyledScrollBar>
+//             {layout1Settings.topbar.show && !layout1Settings.topbar.fixed && (
+//               <ThemeProvider theme={topbarTheme}>
+//                 <Layout1Topbar />
+//                 {/* <Layout1FooterBar /> */}
+//                 {/* <Layout1Secondarytopbar/> */}
+//               </ThemeProvider>
+//             )}
+
+//             <Box flexGrow={1} position="relative">
+//               <AppSuspense>
+//                 <Outlet />
+//               </AppSuspense>
+//             </Box>
+
+//             {settings.footer.show && !settings.footer.fixed && <Footer />}
+//           </StyledScrollBar>
+//         )}
+
+//         {!settings.perfectScrollbar && (
+//           <ContentBox>
+//             {layout1Settings.topbar.show && !layout1Settings.topbar.fixed && (
+//               <ThemeProvider theme={topbarTheme}>
+//                 <Layout1Topbar />
+//                 {/* <Layout1Secondarytopbar/> */}
+//                 {/* <Layout1FooterBar /> */}
+//               </ThemeProvider>
+//             )}
+
+//             <Box flexGrow={1} position="relative">
+//               <AppSuspense>
+//                 <Outlet />
+//               </AppSuspense>
+//             </Box>
+
+//             {settings.footer.show && !settings.footer.fixed && <Footer />}
+//           </ContentBox>
+//         )}
+
+//         {settings.footer.show && settings.footer.fixed && <Footer />}
+
+
+//         <Layout1SecondaryBottomBar />
+//       </LayoutContainer>
+
+//       {settings.secondarySidebar.show && <MailSidebar />}
+
+//       {/* Add Layout1SecondaryBottomBar here */}
+//       <Layout1SecondaryBottomBar />
+//     </Layout1Root>
+//   );
+// };
+
+// export default React.memo(Layout1);
 
 
 

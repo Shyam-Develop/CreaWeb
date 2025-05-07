@@ -9,6 +9,8 @@ import { Dashboard, Home } from "@mui/icons-material";
 import UnderDevelopment from "./views/sessions/UnderDevelopment";
 
 import HomePage from "./views/Home/Home";
+import accountRoutes from "./views/Account/AccountRoutes";
+import hiringRoutes from "./views/Hiring DashBoard/Hiringroutes";
 
 const routes = [
     {
@@ -20,17 +22,8 @@ const routes = [
       children: [
          { path: '/home', element:<HomePage/> },
         // ...mastersRoutes,
-        // ...priceBookRoutes,
-        // ...QuoteRoutes,
-        // ...priceBookDirectoryRoutes,
-        // ...EditpriceBookTemplateRoutes,
-        // ...editpriceBookRoutes,
-        // ...specialsRoutes,
-        // ...ConfigurePriceBookRoutes,
-        // ...profileRoutes,
-        // ...QuoteTemplateRoutes,
-        // ...PdfRoutes,
-        // ...mailRoutes,
+        ...accountRoutes,
+        ...hiringRoutes,
         { path: '*', element: <UnderDevelopment /> },
       ],
     },

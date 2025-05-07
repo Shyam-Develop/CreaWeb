@@ -1,190 +1,180 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import {
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  Avatar,
+  Stack,
+  IconButton,
+} from "@mui/material";
 import logo from "../../../assets/logo.jpg";
 
-const handleGoogleLogin = () => {
-  alert("Google login clicked!");
-};
+const SignUpSchema = Yup.object().shape({
+  fullName: Yup.string().required("Full Name is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email or Phone Number is required"),
+  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Confirm Password is required"),
+});
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
 
-  const [error, setError] = useState("");
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!formData.fullName || !formData.email || !formData.password || !formData.confirmPassword) {
-      setError("All fields are required.");
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
-
-    setError("");
-    alert("Sign Up Successful!");
-    navigate("/nextpage");
+  const handleGoogleLogin = () => {
+    alert("Google login clicked!");
   };
 
   const handleSignInClick = () => {
     navigate("/session/signin");
   };
+  const handleContinueClick = async (values) => {
+    const data = {
+      Fullname: values.fullName,
+      Email: values.email,
+      Password: values.password,
+      ConfirmPassword: values.confirmPassword,
+    };
 
-  const handleContinueClick = () => {
+    console.log("Form Data Submitted:", data);
+    alert("Sign Up Successful!");
     navigate("/session/email-verification");
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.logoContainer}>
-          <img src={logo} alt="Logo" style={styles.logo} />
-        </div>
+    <Container maxWidth="sm" sx={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <Box sx={{ width: "100%", p: 4, bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
+        <Stack spacing={2} alignItems="center" mb={2}>
+          <Avatar src={logo} sx={{ width: 100, height: 100 }} />
+          <Typography variant="h5">Create Your Artistic Profile</Typography>
+        </Stack>
 
+        <Formik
+          initialValues={{ fullName: "", email: "", password: "", confirmPassword: "" }}
+          validationSchema={SignUpSchema}
+          onSubmit={(values) => {
+            handleContinueClick(values)
+          }}
+        >
+{({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+      })=>(
+            <form onSubmit={handleSubmit}>
+              <Stack spacing={2}>
+                <TextField
+                  id="fullName"
+                  label="Name"
+                  name="fullName"
+                  value={values.fullName}
+                  onChange={handleChange}
+                  error={Boolean(errors.fullName && touched.fullName)}
+                  helperText={touched.fullName && errors.fullName}
+                  fullWidth
+                  required
+                  InputLabelProps={{
+                    sx: {
+                        '& .MuiInputLabel-asterisk': {
+                            color: 'red',
+                        },
+                    },
+                }}/>
+                <TextField
+                  id="email"
+                  label="Email or Phone Number"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  error={Boolean(errors.email && touched.email)}
+                  helperText={touched.email && errors.email}
+                  fullWidth
+                  required
+                  InputLabelProps={{
+                    sx: {
+                        '& .MuiInputLabel-asterisk': {
+                            color: 'red',
+                        },
+                    },
+                }}/>
+                <TextField
+                  id="password"
+                  label="Password"
+                  type="password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  error={Boolean(errors.password && touched.password)}
+                  helperText={touched.password && errors.password}
+                  fullWidth
+                  required
+                  InputLabelProps={{
+                    sx: {
+                        '& .MuiInputLabel-asterisk': {
+                            color: 'red',
+                        },
+                    },
+                }}/>
+                <TextField
+                  id="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  name="confirmPassword"
+                  value={values.confirmPassword}
+                  onChange={handleChange}
+                  error={Boolean(errors.confirmPassword && touched.confirmPassword)}
+                  helperText={touched.confirmPassword && errors.confirmPassword}
+                  fullWidth
+                  required
+                  InputLabelProps={{
+                    sx: {
+                        '& .MuiInputLabel-asterisk': {
+                            color: 'red',
+                        },
+                    },
+                }}/>
 
+                <Typography variant="body2" align="center">
+                  Already have an account?{' '}
+                  <Button variant="text" size="small" onClick={handleSignInClick}>
+                    Log In
+                  </Button>
+                </Typography>
 
-        <h2 style={styles.heading}>Create Your artistic profile</h2>
+                <Stack spacing={1} alignItems="center">
+                  <Typography variant="body1">Continue with Login via Google</Typography>
+                  <IconButton onClick={handleGoogleLogin} sx={{ bgcolor: "#4285F4", color: "white", '&:hover': { bgcolor: "#357ae8" } }}>
+                    <FaGoogle size={24} />
+                  </IconButton>
+                </Stack>
 
-        {error && <p style={styles.error}>{error}</p>}
-
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Name"
-          value={formData.fullName}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email or PhoneNumber"
-          value={formData.email}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          style={styles.input}
-        />
-        <p style={styles.loginText}>
-          Already have an account? <span onClick={handleSignInClick} style={styles.link}>Log In</span>
-        </p>
-
-        <div style={styles.googleLoginContainer}>
-          <p style={styles.googleText}>Continue with Login via Google</p>
-          <div style={styles.googleIconContainer} onClick={handleGoogleLogin}>
-            <FaGoogle style={styles.googleIcon} />
-          </div>
-        </div>
-
-        <button type="button" onClick={handleContinueClick} style={styles.continueButton}>
-          Continue
-        </button>
-      </form>
-    </div>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  // onClick={handleContinueClick}
+                >
+                  Continue
+                </Button>
+              </Stack>
+            </form>
+          )}
+        </Formik>
+      </Box>
+    </Container>
   );
-};
-
-const styles = {
-  container: {
-    minHeight: "100vh",
-    backgroundColor: "#f2f2f2",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  form: {
-    padding: "40px",
-    borderRadius: "10px",
-    width: "100%",
-    maxWidth: "400px",
-    display: "flex",
-    flexDirection: "column",
-  },
-  logoContainer: {
-    textAlign: "center",
-    marginBottom: "20px",
-  },
-  logo: {
-    width: "100px",
-    height: "auto",
-  },
-  heading: {
-    textAlign: "center",
-    marginBottom: "20px",
-    color: "#333",
-  },
-  input: {
-    marginBottom: "15px",
-    padding: "12px",
-    fontSize: "16px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-  },
-  error: {
-    color: "red",
-    marginBottom: "10px",
-    textAlign: "center",
-  },
-  loginText: {
-    textAlign: "center",
-    marginBottom: "20px",
-  },
-  link: {
-    color: "#4285F4",
-    cursor: "pointer",
-    textDecoration: "underline",
-  },
-  googleLoginContainer: {
-    marginTop: "20px",
-    textAlign: "center",
-  },
-  googleText: {
-    marginBottom: "10px",
-    fontSize: "16px",
-    color: "#333",
-  },
-  googleIconContainer: {
-    display: "inline-block",
-    padding: "10px",
-    borderRadius: "50%",
-    backgroundColor: "#4285F4",
-    cursor: "pointer",
-  },
-  googleIcon: {
-    color: "white",
-    fontSize: "24px",
-  },
-  continueButton: {
-    padding: "12px",
-    backgroundColor: "#4285F4",
-    color: "#fff",
-    fontSize: "16px",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    marginTop: "20px",
-  },
 };
 
 export default SignUp;
