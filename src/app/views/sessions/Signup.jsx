@@ -8,9 +8,6 @@ import logo from "../../../assets/logo.jpg";
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const handleGoogleLogin = () => {
-    alert("Google login clicked!");
-  };
 
   const handleSignInClick = () => {
     navigate("/session/signin");
