@@ -7,7 +7,6 @@ import {
   Typography,
   Card,
   CardContent,
-  CardActions,
   IconButton,
 } from "@mui/material";
 
@@ -15,55 +14,60 @@ const AccountVerification = () => {
   const navigate = useNavigate();
 
   const handlePhoneVerify = () => {
-    navigate("/session/phone-verification");
+    navigate("/session/phone-number");
+  };
+
+  const handleEmailVerify = () => {
+    navigate("/session/email-verify");
   };
 
   const handleContinue = () => {
-    alert("Account verified successfully!");
-    navigate("/home");
-  };
-
-  const handleSkip = () => {
     navigate("/session/upload-id");
   };
+
+ 
 
   return (
     <Box sx={{ padding: 2, maxWidth: 480, margin: "0 auto", fontFamily: "sans-serif" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
         <Box />
-        <Typography
-          variant="body2"
-          sx={{ cursor: "pointer", color: "text.secondary" }}
-          onClick={handleSkip}
-        >
-          Skip
-        </Typography>
+       
       </Box>
 
       <Typography variant="h5" fontWeight="bold" mb={3}>
         Account Verification
       </Typography>
 
-      {/* Verified Email Card */}
-      <Card sx={{ borderColor: "success.main", border: 1, backgroundColor: "#f0fff5", mb: 2 }}>
+      {/* Email Card */}
+      <Card
+        sx={{ borderColor: "grey.400", border: 1, mb: 2 }}
+        onClick={handleEmailVerify}
+        style={{ cursor: "pointer" }}
+      >
         <CardContent sx={{ display: "flex", alignItems: "center" }}>
           <IconButton disabled>
             <MdEmail size={24} color="#666" />
           </IconButton>
           <Box sx={{ flex: 1, ml: 2 }}>
             <Typography variant="subtitle1" fontWeight={600}>
-              Email address
+              Email Address
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Verified with your email
+              Verify with your email
             </Typography>
           </Box>
-          <MdCheckCircle size={24} color="#28a745" />
+          <Button variant="text" color="primary">
+            Verify
+          </Button>
         </CardContent>
       </Card>
 
-      {/* Phone Verification Card */}
-      <Card sx={{ borderColor: "grey.400", border: 1, mb: 4 }}>
+      {/* Phone Card */}
+      <Card
+        sx={{ borderColor: "grey.400", border: 1, mb: 4 }}
+        onClick={handlePhoneVerify}
+        style={{ cursor: "pointer" }}
+      >
         <CardContent sx={{ display: "flex", alignItems: "center" }}>
           <IconButton disabled>
             <MdPhone size={24} color="#666" />
@@ -76,7 +80,7 @@ const AccountVerification = () => {
               Verify with your phone number
             </Typography>
           </Box>
-          <Button variant="text" color="warning" onClick={handlePhoneVerify}>
+          <Button variant="text" color="warning">
             Verify
           </Button>
         </CardContent>

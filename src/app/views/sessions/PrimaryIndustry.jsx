@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import industryImg from "../../../assets/flim.jpg"; // ✅ Import your image here
 import {
   Box,
   Container,
@@ -14,43 +13,32 @@ import {
   Stack,
 } from '@mui/material';
 
-const Countryindustry = () => {
+const PrimaryIndustry = ({ title = "Choose one primary industry", images = [], nextPath = "/" }) => {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = React.useState("");
 
   const handleContinue = () => {
-    navigate("/session/primary-industry");
+    navigate("/session/select-your-skills");
   };
 
   const handleSearch = () => {
-    navigate("");
+    // Search functionality can be added later
   };
-
-
-  const circleImages = [
-    { id: 1, src: industryImg, name: "Industry 1" },
-    { id: 2, src: industryImg, name: "Industry 2" },
-    { id: 3, src: industryImg, name: "Industry 3" },
-    { id: 4, src: industryImg, name: "Industry 4" },
-    { id: 5, src: industryImg, name: "Industry 5" },
-    { id: 6, src: industryImg, name: "Industry 6" },
-  ];
 
   return (
     <div style={styles.container}>
-           <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-                    <Typography variant="caption" fontWeight={500} color="text.secondary">I am</Typography>
-                    <Typography variant="caption" fontWeight={500} color="primary">Self</Typography>
-                    <Typography variant="caption" fontWeight={500} color="text.secondary">Experience</Typography>
-                    <Typography variant="caption" fontWeight={500} color="text.secondary">Education</Typography>
-                  </Stack>
-            {/* Profile Section */}
-               <Box mt={1}>
-                    <LinearProgress variant="determinate" value={18} sx={{ height: 6, borderRadius: 5 }} />
-                  </Box>
-      
-
-      <h2 style={styles.uploadIdTitle}>Choose your industry</h2>
+             <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
+                         <Typography variant="caption" fontWeight={500} color="text.secondary">I am</Typography>
+                         <Typography variant="caption" fontWeight={500} color="primary">Self</Typography>
+                         <Typography variant="caption" fontWeight={500} color="text.secondary">Experience</Typography>
+                         <Typography variant="caption" fontWeight={500} color="text.secondary">Education</Typography>
+                       </Stack>
+                 {/* Profile Section */}
+                    <Box mt={1}>
+                         <LinearProgress variant="determinate" value={25} sx={{ height: 6, borderRadius: 5 }} />
+                       </Box>
+           
+      <h2 style={styles.uploadIdTitle}>{title}</h2>
 
       <div style={styles.searchWrapper}>
         <input
@@ -65,7 +53,7 @@ const Countryindustry = () => {
       </div>
 
       <div style={styles.circleImagesWrapper}>
-        {circleImages.map((item) => (
+        {images.map((item) => (
           <div key={item.id} style={styles.circleImageContainer}>
             <img src={item.src} alt={item.name} style={styles.circleImage} />
             <span style={styles.imageName}>{item.name}</span>
@@ -198,4 +186,4 @@ const styles = {
   },
 };
 
-export default Countryindustry;
+export default PrimaryIndustry;
