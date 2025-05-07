@@ -1,30 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-  Avatar,
-  Stack,
-  IconButton,
-} from "@mui/material";
-import logo from "../../../assets/logo.jpg";
+import { FaGoogle, FaApple } from "react-icons/fa";
+import { Box, IconButton } from "@mui/material";
 
-const SignUpSchema = Yup.object().shape({
-  fullName: Yup.string().required("Full Name is required"),
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email or Phone Number is required"),
-  password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirm Password is required"),
-});
+import logo from "../../../assets/logo.jpg";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -49,132 +28,174 @@ const SignUp = () => {
     navigate("/session/email-verification");
   };
 
+  const handleGoogleLogin = () => {
+    alert("Google login clicked!");
+  };
+
+  const handleAppleLogin = () => {
+    alert("Apple login clicked!");
+  };
+
   return (
-    <Container maxWidth="sm" sx={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <Box sx={{ width: "100%", p: 4, bgcolor: "white", borderRadius: 2, boxShadow: 3 }}>
-        <Stack spacing={2} alignItems="center" mb={2}>
-          <Avatar src={logo} sx={{ width: 100, height: 100 }} />
-          <Typography variant="h5">Create Your Artistic Profile</Typography>
-        </Stack>
+    <div style={styles.container}>
+      <form onSubmit={handleSubmit} style={styles.form}>
+        <div style={styles.logoContainer}>
+          <img src={logo} alt="Logo" style={styles.logo} />
+        </div>
 
-        <Formik
-          initialValues={{ fullName: "", email: "", password: "", confirmPassword: "" }}
-          validationSchema={SignUpSchema}
-          onSubmit={(values) => {
-            handleContinueClick(values)
-          }}
+        <h2 style={styles.heading}>Create Your Artistic Profile</h2>
+
+        {error && <p style={styles.error}>{error}</p>}
+
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Name"
+          value={formData.fullName}
+          onChange={handleChange}
+          style={styles.input}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email or Phone Number"
+          value={formData.email}
+          onChange={handleChange}
+          style={styles.input}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          style={styles.input}
+        />
+    
+
+        <p style={styles.loginText}>
+          Already have an account?{" "}
+          <span onClick={handleSignInClick} style={styles.link}>
+            Sign In
+          </span>
+        </p>
+
+        {/* Social Login Section */}
+        <div style={styles.googleLoginContainer}>
+          <p style={styles.googleText}>Continue with</p>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
+            <IconButton
+              onClick={handleGoogleLogin}
+              sx={{
+                backgroundColor: "#fff",
+                border: "1px solid #ccc",
+                "&:hover": { backgroundColor: "#f1f1f1" },
+                width: 48,
+                height: 48,
+              }}
+            >
+              <FaGoogle style={{ color: "#DB4437", fontSize: 22 }} />
+            </IconButton>
+
+            <IconButton
+              onClick={handleAppleLogin}
+              sx={{
+                backgroundColor: "#000",
+                "&:hover": { backgroundColor: "#1a1a1a" },
+                width: 48,
+                height: 48,
+              }}
+            >
+              <FaApple style={{ color: "#fff", fontSize: 22 }} />
+            </IconButton>
+          </Box>
+        </div>
+
+        <button
+          type="button"
+          onClick={handleContinueClick}
+          style={styles.continueButton}
         >
-{({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-      })=>(
-            <form onSubmit={handleSubmit}>
-              <Stack spacing={2}>
-                <TextField
-                  id="fullName"
-                  label="Name"
-                  name="fullName"
-                  value={values.fullName}
-                  onChange={handleChange}
-                  error={Boolean(errors.fullName && touched.fullName)}
-                  helperText={touched.fullName && errors.fullName}
-                  fullWidth
-                  required
-                  InputLabelProps={{
-                    sx: {
-                        '& .MuiInputLabel-asterisk': {
-                            color: 'red',
-                        },
-                    },
-                }}/>
-                <TextField
-                  id="email"
-                  label="Email or Phone Number"
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  error={Boolean(errors.email && touched.email)}
-                  helperText={touched.email && errors.email}
-                  fullWidth
-                  required
-                  InputLabelProps={{
-                    sx: {
-                        '& .MuiInputLabel-asterisk': {
-                            color: 'red',
-                        },
-                    },
-                }}/>
-                <TextField
-                  id="password"
-                  label="Password"
-                  type="password"
-                  name="password"
-                  value={values.password}
-                  onChange={handleChange}
-                  error={Boolean(errors.password && touched.password)}
-                  helperText={touched.password && errors.password}
-                  fullWidth
-                  required
-                  InputLabelProps={{
-                    sx: {
-                        '& .MuiInputLabel-asterisk': {
-                            color: 'red',
-                        },
-                    },
-                }}/>
-                <TextField
-                  id="confirmPassword"
-                  label="Confirm Password"
-                  type="password"
-                  name="confirmPassword"
-                  value={values.confirmPassword}
-                  onChange={handleChange}
-                  error={Boolean(errors.confirmPassword && touched.confirmPassword)}
-                  helperText={touched.confirmPassword && errors.confirmPassword}
-                  fullWidth
-                  required
-                  InputLabelProps={{
-                    sx: {
-                        '& .MuiInputLabel-asterisk': {
-                            color: 'red',
-                        },
-                    },
-                }}/>
-
-                <Typography variant="body2" align="center">
-                  Already have an account?{' '}
-                  <Button variant="text" size="small" onClick={handleSignInClick}>
-                    Log In
-                  </Button>
-                </Typography>
-
-                <Stack spacing={1} alignItems="center">
-                  <Typography variant="body1">Continue with Login via Google</Typography>
-                  <IconButton onClick={handleGoogleLogin} sx={{ bgcolor: "#4285F4", color: "white", '&:hover': { bgcolor: "#357ae8" } }}>
-                    <FaGoogle size={24} />
-                  </IconButton>
-                </Stack>
-
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  // onClick={handleContinueClick}
-                >
-                  Continue
-                </Button>
-              </Stack>
-            </form>
-          )}
-        </Formik>
-      </Box>
-    </Container>
+          Continue
+        </button>
+      </form>
+    </div>
   );
+};
+
+const styles = {
+  container: {
+    minHeight: "100vh",
+    backgroundColor: "#fff", // Change this to white
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  form: {
+    padding: "40px",
+    borderRadius: "10px",
+    backgroundColor: "#fff",
+    width: "100%",
+    maxWidth: "400px",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+  },
+  logoContainer: {
+    textAlign: "center",
+    marginBottom: "20px",
+  },
+  logo: {
+    width: "100px",
+    height: "auto",
+  },
+  heading: {
+    textAlign: "center",
+    marginBottom: "20px",
+    color: "#333",
+  },
+  input: {
+    marginBottom: "15px",
+    padding: "12px",
+    fontSize: "16px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+  },
+  error: {
+    color: "red",
+    marginBottom: "10px",
+    textAlign: "center",
+  },
+  loginText: {
+    textAlign: "center",
+    marginBottom: "20px",
+    fontSize: "14px",
+  },
+  link: {
+    color: "#4285F4",
+    cursor: "pointer",
+    textDecoration: "underline",
+  },
+  googleLoginContainer: {
+    marginTop: "10px",
+    marginBottom: "20px",
+    textAlign: "center",
+  },
+  googleText: {
+    marginBottom: "10px",
+    fontSize: "16px",
+    color: "#333",
+  },
+  continueButton: {
+    padding: "12px",
+    backgroundColor: "#4285F4",
+    color: "#fff",
+    fontSize: "16px",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    marginTop: "10px",
+  },
 };
 
 export default SignUp;

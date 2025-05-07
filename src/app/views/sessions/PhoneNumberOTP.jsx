@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, TextField, Typography, Link } from "@mui/material";
+import { Box, Button, TextField, Typography, InputAdornment } from "@mui/material";
 
-const EmailVerification = () => {
+const PhoneNumberOTP = () => {
   const navigate = useNavigate();
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const inputsRef = useRef([]);
 
   const handleChange = (value, index) => {
@@ -27,6 +28,8 @@ const EmailVerification = () => {
       return;
     }
 
+    setError("");
+    alert("Phone number verified successfully!");
     navigate("/session/account-verification");
   };
 
@@ -36,15 +39,14 @@ const EmailVerification = () => {
 
   return (
     <Box
-    sx={{
-      minHeight: "100vh",
-      backgroundColor: "#fff", // Changed from "#f2f2f2" to white
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
-  
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "#f2f2f2",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Box
         component="form"
         onSubmit={handleVerificationSubmit}
@@ -60,7 +62,7 @@ const EmailVerification = () => {
         }}
       >
         <Typography variant="h5" sx={{ textAlign: "center", mb: 1 }}>
-          Email Verification
+          Phone Verification
         </Typography>
 
         <Typography variant="body2" sx={{ textAlign: "center", mb: 2, color: "text.secondary" }}>
@@ -73,10 +75,31 @@ const EmailVerification = () => {
           </Typography>
         )}
 
+        {/* Indian Phone Number Field */}
         <TextField
           variant="outlined"
-          placeholder="Enter your EmailID"
+          placeholder="Enter 10-digit mobile number"
+          type="tel"
           fullWidth
+          value={phoneNumber}
+          onChange={(e) => {
+            const val = e.target.value;
+            if (/^\d{0,10}$/.test(val)) {
+              setPhoneNumber(val);
+            }
+          }}
+          inputProps={{
+            maxLength: 10,
+            inputMode: "numeric",
+            pattern: "[0-9]*",
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Typography sx={{ color: "rgba(0, 0, 0, 0.6)" }}>+91</Typography>
+              </InputAdornment>
+            ),
+          }}
           sx={{ mb: 2 }}
         />
 
@@ -112,6 +135,20 @@ const EmailVerification = () => {
           ))}
         </Box>
 
+        <Typography
+          variant="body2"
+          sx={{
+            color: "#4285F4",
+            textAlign: "center",
+            cursor: "pointer",
+            mt: 2,
+            textDecoration: "underline",
+          }}
+          onClick={handleResendCode}
+        >
+          Didn't receive code? Resend
+        </Typography>
+
         <Button
           type="submit"
           fullWidth
@@ -127,25 +164,11 @@ const EmailVerification = () => {
             },
           }}
         >
-            Submit
+          Submit
         </Button>
-
-        <Typography
-          variant="body2"
-          sx={{
-            color: "#4285F4",
-            textAlign: "center",
-            cursor: "pointer",
-            mt: 2,
-            textDecoration: "underline",
-          }}
-          onClick={handleResendCode}
-        >
-          Didn't receive code? Resend
-        </Typography>
       </Box>
     </Box>
   );
 };
 
-export default EmailVerification;
+export default PhoneNumberOTP;

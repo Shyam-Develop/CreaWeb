@@ -1,5 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  Container,
+  Typography,
+  Avatar,
+  TextField,
+  LinearProgress,
+  IconButton,
+  Button,
+  Stack,
+} from '@mui/material';
+
+
 
 const Joinus = () => {
   const navigate = useNavigate();
@@ -8,7 +21,7 @@ const Joinus = () => {
   const handleContinue = () => {
     if (selectedRole) {
       alert(`Joined as ${selectedRole}. Account verified successfully!`);
-      navigate("/home");
+      navigate("/session/country-industry");
     } else {
       alert("Please select a role to continue.");
     }
@@ -22,25 +35,29 @@ const Joinus = () => {
 
   return (
     <div style={styles.container}>
-      {/* Skip on top right */}
+      {/* Steps */}
+       <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
+              <Typography variant="caption" fontWeight={500} color="text.secondary">I am</Typography>
+              <Typography variant="caption" fontWeight={500} color="primary">Self</Typography>
+              <Typography variant="caption" fontWeight={500} color="text.secondary">Experience</Typography>
+              <Typography variant="caption" fontWeight={500} color="text.secondary">Education</Typography>
+            </Stack>
+      {/* Profile Section */}
+         <Box mt={1}>
+              <LinearProgress variant="determinate" value={15} sx={{ height: 6, borderRadius: 5 }} />
+            </Box>
+
+      {/* Skip */}
       <div style={styles.skipWrapper}>
         <span style={styles.skip} onClick={handleSkip}>
           Skip
         </span>
       </div>
 
-      <div style={styles.stepsContainer}>
-        {["I am", "Self", "Experience", "Education"].map((label, index) => (
-          <div key={index} style={styles.stepWrapper}>
-            <span style={styles.stepLabel}>{label}</span>
-            <div style={styles.stepDot} />
-            <div style={styles.stepLine} />
-          </div>
-        ))}
-      </div>
-
+      {/* Title */}
       <h2 style={styles.uploadIdTitle}>Join as...</h2>
 
+      {/* Role Selection */}
       {roles.map((role) => (
         <div
           key={role}
@@ -55,6 +72,7 @@ const Joinus = () => {
         </div>
       ))}
 
+      {/* Continue Button */}
       <button style={styles.continueButton} onClick={handleContinue}>
         Continue
       </button>
@@ -70,24 +88,13 @@ const styles = {
     margin: "0 auto",
     position: "relative",
   },
-  skipWrapper: {
-    display: "flex",
-    justifyContent: "flex-end",
-    marginBottom: "8px",
-  },
-  skip: {
-    fontSize: "16px",
-    color: "#666",
-    cursor: "pointer",
-  },
   stepsContainer: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "flex-start",
     position: "relative",
-    marginBottom: "24px",
+    marginBottom: "50px",
     marginTop: "28px",
-    marginBottom: "50px"
   },
   stepWrapper: {
     flex: 1,
@@ -118,6 +125,17 @@ const styles = {
     zIndex: -1,
     transform: "translateX(50%)",
   },
+  skipWrapper: {
+    display: "flex",
+    justifyContent: "flex-end",
+    marginBottom: "8px",
+  },
+  skip: {
+    fontSize: "16px",
+    color: "#4285F4",
+    cursor: "pointer",
+    fontWeight: "500",
+  },
   uploadIdTitle: {
     fontSize: "28px",
     fontWeight: "bold",
@@ -143,7 +161,74 @@ const styles = {
     border: "none",
     borderRadius: "12px",
     cursor: "pointer",
-    marginTop: "30px"
+    marginTop: "30px",
+  },
+
+  // Profile styles
+  profileContainer: {
+    textAlign: "center",
+    marginBottom: "30px",
+    position: "relative",
+  },
+  bannerContainer: {
+    position: "relative",
+  },
+  bannerImage: {
+    width: "100%",
+    height: "180px",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    borderRadius: "8px",
+  },
+  editIconBanner: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    backgroundColor: "#fff",
+    borderRadius: "50%",
+    padding: "6px",
+    fontSize: "14px",
+    boxShadow: "0 1px 4px rgba(0,0,0,0.3)",
+    cursor: "pointer",
+  },
+  profilePicWrapper: {
+    position: "relative",
+    marginTop: "-50px",
+    display: "inline-block",
+  },
+  profilePic: {
+    width: "100px",
+    height: "100px",
+    borderRadius: "50%",
+    border: "4px solid #fff",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundColor: "#ddd",
+  },
+  editIconProfile: {
+    position: "absolute",
+    bottom: "0",
+    right: "0",
+    backgroundColor: "#fff",
+    borderRadius: "50%",
+    padding: "4px",
+    fontSize: "14px",
+    boxShadow: "0 1px 4px rgba(0,0,0,0.3)",
+    cursor: "pointer",
+  },
+  profileText: {
+    marginTop: "10px",
+  },
+  profileName: {
+    fontSize: "20px",
+    fontWeight: "600",
+    margin: "6px 0",
+  },
+  profileRole: {
+    fontSize: "14px",
+    color: "#666",
   },
 };
 

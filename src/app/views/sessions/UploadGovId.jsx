@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaRegCreditCard } from "react-icons/fa";
-import { FaIdCard } from "react-icons/fa";
-
+import { FaUpload } from "react-icons/fa";
 
 const UploadgovermentID = () => {
   const navigate = useNavigate();
+  const [fileName, setFileName] = useState("");
 
-  const [aadhaarCard, setAadhaarCard] = useState("");
-  const [panCard, setPanCard] = useState("");
-  const [drivingLicense, setDrivingLicense] = useState("");
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.size <= 2 * 1024 * 1024) {
+      setFileName(file.name);
+    } else {
+      alert("File size should not exceed 2 MB");
+    }
+  };
 
   const handleContinue = () => {
-    alert("Account verified successfully!");
-    navigate("/home");
+   
+    navigate("/session/load-screen");
   };
 
   const handleSkip = () => {
@@ -22,56 +26,34 @@ const UploadgovermentID = () => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.header}>
-        <div></div>
-        <span style={styles.skip} onClick={handleSkip}>Skip</span>
-      </div>
+     
 
-      <h2 style={styles.uploadIdTitle}>Upload a GovernmentID</h2>
+      <h3 style={styles.uploadIdTitle}>Upload a GovernmentID</h3>
       <h1 style={styles.subtitle}>This is to make sure you're a valid person</h1>
 
-      <div style={styles.inputWrapper}>
-        <div style={styles.inputContainer}>
-          <span style={styles.rupeeSymbol}>₹</span>
-          <select
-            style={styles.selectField}
-            value={aadhaarCard}
-            onChange={(e) => setAadhaarCard(e.target.value)}
-          >
-            <option value="" disabled>Aadhaar Card</option>
-            <option value="aadhaar">Aadhaar Card</option>
-          </select>
-        </div>
+      <h4 style={styles.uploadsubtitle}>Upload Document</h4>
+
+
+      <div style={styles.uploadBox}>
+        <label htmlFor="fileInput" style={styles.uploadLabel}>
+          <FaUpload size={24} style={{ marginBottom: 10 }} />
+          <span>
+            <strong style={{ color: "#4f74f9", cursor: "pointer" }}>Choose</strong>{" "}
+            file to upload
+          </span>
+          <p style={styles.subNote}>Select File in jpeg or PDF</p>
+          <input
+            id="fileInput"
+            type="file"
+            accept=".jpg,.jpeg,.pdf"
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
+        </label>
+        {fileName && <p style={styles.fileName}>Uploaded: {fileName}</p>}
       </div>
 
-      <div style={styles.inputWrapper}>
-        <div style={styles.inputContainer}>
-          <FaRegCreditCard style={styles.iconStyle} />
-          <select
-            style={styles.selectField}
-            value={panCard}
-            onChange={(e) => setPanCard(e.target.value)}
-          >
-            <option value="" disabled>PAN Card</option>
-            <option value="pan">PAN Card</option>
-          </select>
-        </div>
-      </div>
-
-      <div style={styles.inputWrapper}>
-        <div style={styles.inputContainer}>
-          <FaIdCard style={styles.iconStyle} />
-          <select
-            style={styles.selectField}
-            value={drivingLicense}
-            onChange={(e) => setDrivingLicense(e.target.value)}
-          >
-            <option value="" disabled>Driving License</option>
-            <option value="dl">Driving License</option>
-          </select>
-        </div>
-      </div>
-
+      <p style={styles.fileSizeNote}>The file size should not exceed 2 mb</p>
 
       <button style={styles.continueButton} onClick={handleContinue}>
         Continue
@@ -102,43 +84,46 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "12px",
   },
+  uploadsubtitle: {
+    fontSize: "23px",
+    fontWeight: "bold",
+    marginBottom: "12px",
+  },
   subtitle: {
     fontSize: "16px",
     color: "#666",
     marginBottom: "20px",
   },
-  inputWrapper: {
-    marginBottom: "20px",
+  uploadBox: {
+    border: "2px dashed #ccc",
+    padding: "30px",
+    borderRadius: "10px",
+    textAlign: "center",
+    marginBottom: "10px",
+    backgroundColor: "#fafafa",
   },
-  inputContainer: {
+  uploadLabel: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    borderRadius: "8px",
-    border: "1px solid #ccc",
-    overflow: "hidden",
-  },
-  rupeeSymbol: {
-    padding: "10px",
-    fontSize: "16px",
-    backgroundColor: "#f9f9f9",
-    borderRight: "1px solid #ccc",
+    cursor: "pointer",
     color: "#333",
   },
-  iconStyle: {
-    padding: "10px",
-    fontSize: "18px",
-    backgroundColor: "#f9f9f9",
-    borderRight: "1px solid #ccc",
-    color: "#333",
+  subNote: {
+    fontSize: "14px",
+    color: "#888",
+    marginTop: "6px",
   },
-  selectField: {
-    flex: 1,
-    padding: "10px",
-    fontSize: "16px",
-    border: "none",
-    backgroundColor: "#f9f9f9",
-    borderRadius: "8px",
-    outline: "none",
+  fileSizeNote: {
+    fontSize: "13px",
+    color: "#555",
+    marginBottom: "20px",
+    textAlign: "center",
+  },
+  fileName: {
+    fontSize: "13px",
+    color: "#4f74f9",
+    marginTop: "10px",
   },
   continueButton: {
     width: "100%",

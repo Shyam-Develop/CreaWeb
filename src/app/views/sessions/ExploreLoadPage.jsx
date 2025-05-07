@@ -12,26 +12,30 @@ const Explore = () => {
 
     return (
         <Container
-        disableGutters
-        sx={{
-            
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            minHeight: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-         
-       
-        }}
+            disableGutters
+            maxWidth={false}
+            sx={{
+                width: '100%',
+                height: '100vh',
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                position: 'relative',
+                color: '#fff',
+                px: 2,
+            }}
+        >
+<div style={{ position: "absolute", top: 16, right: 16 }}>
+    <span
+        style={{ color: "#FFFFFF", fontSize: 14, cursor: "pointer" }}
+        onClick={() => navigate('/session/signin')} 
     >
-    
-            <div style={{ position: "absolute", top: 16, right: 16 }}>
-                <span style={{ color: "#fff", fontSize: 14, cursor: "pointer" }}>
-                    Skip
-                </span>
-            </div>
+        Skip
+    </span>
+</div>
 
             <div style={{ flex: 1 }} />
 
@@ -68,7 +72,7 @@ const Explore = () => {
                                 height: 10,
                                 borderRadius: "50%",
                                 backgroundColor: "#fff",
-                                opacity: index === 1 ? 1 : 0.3,
+                                opacity: index === 2 ? 1 : 0.3,
                                 margin: "0 5px",
                             }}
                         />

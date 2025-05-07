@@ -25,6 +25,26 @@ const ConnectLoad = Loadable(lazy(() => import('./ConnectLoadPage')));
 const DiscoverLoad = Loadable(lazy(() => import('./DiscoverLoadPage')));
 
 const ExploreLoad = Loadable(lazy(() => import('./ExploreLoadPage')));
+const SelectYourSkills = Loadable(lazy(() => import('./SelectYourSkills')));
+const Biography = Loadable(lazy(() => import('./Biography')));
+const Experience = Loadable(lazy(() => import('./Experience')));
+const Education = Loadable(lazy(() => import('./Education')));
+const PhoneNumber = Loadable(lazy(() => import('./PhoneNumber')));
+const PhoneNumberOTP = Loadable(lazy(() => import('./PhoneNumberOTP')));
+const EmailVerify = Loadable(lazy(() => import('./EmailVerify')));
+const EmailVerifyOTP = Loadable(lazy(() => import('./EmailVerifyOTP')));
+const LoadScreen = Loadable(lazy(() => import('./LoadScreen')));
+const PrimaryIndustry = Loadable(lazy(() => import('./PrimaryIndustry')));
+const SelectedSkills = Loadable(lazy(() => import('./SelectedSkills')));
+const ProfileStep = Loadable(lazy(() => import('./ProfileStep')));
+const HelpOptionScreen = Loadable(lazy(() => import('./HelpOptionScreen')));
+const LoadingPage = Loadable(lazy(() => import('./LoadingPage')));
+const Education2 = Loadable(lazy(() => import('./Education2')));
+
+
+
+
+
 
 const sessionRoutes = [
   { path: '/session/signup', element: <JwtRegister /> },
@@ -48,6 +68,35 @@ const sessionRoutes = [
  {path:"/crea/on-boarding" ,element:<ConnectLoad/>},
  {path:"/session/crea-discover" ,element:<DiscoverLoad/>},
  {path:"/session/crea-explore" ,element:<ExploreLoad/>},
+  {path:"/session/select-your-skills" ,element:<SelectYourSkills/>},
+  {path:"/session/biography" ,element:<Biography/>},
+  {path:"/session/experience" ,element:<Experience/>},
+  {path:"/session/education" ,element:<Education/>},
+  {path:"/session/phone-number" ,element:<PhoneNumber/>},
+  {path:"/session/phone-number-otp" ,element:<PhoneNumberOTP/>},
+  {path:"/session/email-verify" ,element:<EmailVerify/>},
+  {path:"/session/email-verify-otp" ,element:<EmailVerifyOTP/>},
+  {path:"/session/load-screen" ,element:<LoadScreen/>},
+  {path:"/session/primary-industry" ,element:<PrimaryIndustry/>},
+  {path:"/session/selected-skills" ,element:<SelectedSkills/>},
+  {path:"/session/profile-step" ,element:<ProfileStep/>},
+  {path:"/session/help-option-screen" ,element:<HelpOptionScreen/>},
+  {path:"/session/loading-page" ,element:<LoadingPage/>},
+  {path:"/session/education2" ,element:<Education2/>},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

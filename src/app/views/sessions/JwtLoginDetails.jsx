@@ -7,7 +7,7 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle, FaApple } from "react-icons/fa"; // Import Apple logo
 import { useNavigate } from "react-router-dom";
 import backgroundImage from "../../../assets/pict.jpg";
 import { Formik } from "formik";
@@ -21,6 +21,10 @@ export default function LoginDetails() {
 
   const handleGoogleLogin = () => {
     alert("Google login clicked!");
+  };
+
+  const handleAppleLogin = () => {
+    alert("Apple login clicked!");
   };
 
   const handleFormSubmit = async (values) => {
@@ -117,7 +121,25 @@ export default function LoginDetails() {
                 onChange={handleChange}
                 helperText={touched.email && errors.email}
                 error={Boolean(errors.email && touched.email)}
-                sx={{ mb: 3 }}
+                sx={{
+                  mb: 3,
+                  input: { color: "white" },
+                  label: { color: "white" },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "white",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#90caf9",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#42a5f5",
+                    },
+                  },
+                }}
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
               />
 
               <TextField
@@ -132,7 +154,25 @@ export default function LoginDetails() {
                 onChange={handleChange}
                 helperText={touched.password && errors.password}
                 error={Boolean(errors.password && touched.password)}
-                sx={{ mb: 1.5 }}
+                sx={{
+                  mb: 1.5,
+                  input: { color: "white" },
+                  label: { color: "white" },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "white",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#90caf9",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#42a5f5",
+                    },
+                  },
+                }}
+                InputLabelProps={{
+                  style: { color: "white" },
+                }}
               />
 
               <Box
@@ -196,15 +236,28 @@ export default function LoginDetails() {
                     mb: 1,
                   }}
                 >
-                  Continue with Login via Google
+                  Continue with Login via
                 </Typography>
+
+                {/* Google login button */}
                 <FaGoogle
                   style={{
                     fontSize: "30px",
                     color: "#4285F4",
                     cursor: "pointer",
+                    marginRight: "20px",
                   }}
                   onClick={handleGoogleLogin}
+                />
+
+                {/* Apple login button */}
+                <FaApple
+                  style={{
+                    fontSize: "30px",
+                    color: "#000",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleAppleLogin}
                 />
               </Box>
             </Box>

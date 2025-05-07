@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, Container } from "@mui/material";
-import Crea from "../../../assets/logo.jpg"; 
+import Crea from "../../../assets/logo.jpg";
 
 const CreaScreen = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/crea/on-boarding"); 
+      navigate("/crea/on-boarding");
     }, 2000);
 
     return () => clearTimeout(timer);
@@ -16,15 +16,16 @@ const CreaScreen = () => {
 
   return (
     <Container
-      maxWidth="xs"
+      maxWidth={false}
+      disableGutters
       sx={{
-        bgcolor: "#ccc",
-        minHeight: "100vh",
+        bgcolor: "#fff", // white background
+        height: "100vh",
+        width: "100vw",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        py: 4,
       }}
     >
       <Typography variant="h2" sx={{ color: "#2e2f3e", fontWeight: "bold" }}>
@@ -35,7 +36,7 @@ const CreaScreen = () => {
         <img
           src={Crea}
           alt="CREA Logo"
-          style={{ maxWidth: "100%", height: "auto" }}
+          style={{ maxWidth: "300px", width: "100%", height: "auto" }}
         />
       </Box>
     </Container>

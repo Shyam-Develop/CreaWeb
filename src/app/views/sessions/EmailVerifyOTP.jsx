@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, TextField, Typography, Link } from "@mui/material";
 
-const EmailVerification = () => {
+const EmailVerifyOTP = () => {
   const navigate = useNavigate();
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
@@ -27,6 +27,8 @@ const EmailVerification = () => {
       return;
     }
 
+    setError("");
+    alert("Email verified successfully!");
     navigate("/session/account-verification");
   };
 
@@ -36,15 +38,14 @@ const EmailVerification = () => {
 
   return (
     <Box
-    sx={{
-      minHeight: "100vh",
-      backgroundColor: "#fff", // Changed from "#f2f2f2" to white
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    }}
-  >
-  
+      sx={{
+        minHeight: "100vh",
+        backgroundColor: "#f2f2f2",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Box
         component="form"
         onSubmit={handleVerificationSubmit}
@@ -127,7 +128,7 @@ const EmailVerification = () => {
             },
           }}
         >
-            Submit
+          Submit
         </Button>
 
         <Typography
@@ -148,4 +149,4 @@ const EmailVerification = () => {
   );
 };
 
-export default EmailVerification;
+export default EmailVerifyOTP;

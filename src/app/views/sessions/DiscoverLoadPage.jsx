@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import backgroundImage from '../../../assets/pict.jpg';
 
 const Discover = () => {
     const navigate = useNavigate();
@@ -11,31 +12,34 @@ const Discover = () => {
 
     return (
         <Container
-           disableGutters
-           sx={{
-               width: '100%',
-               maxWidth: 400, 
-               mx: 'auto', 
-               backgroundImage: 'url("/background.jpg")',
-               backgroundSize: 'cover',
-               backgroundPosition: 'center',
-               minHeight: '100vh',
-               display: 'flex',
-               flexDirection: 'column',
-               justifyContent: 'space-between',
-               position: 'relative',
-               color: '#fff',
-               px: 2,
-           }}
-       >
+            disableGutters
+            maxWidth={false}
+            sx={{
+                width: '100%',
+                height: '100vh', // Full screen height
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                position: 'relative',
+                color: '#fff',
+                px: 2,
+            }}
+        >
+            {/* Skip link */}
             <div style={{ position: 'absolute', top: 16, right: 16 }}>
-                <span style={{ color: '#fff', fontSize: 14, cursor: 'pointer' }}>
+                <span style={{ color: '#fff', fontSize: 14, cursor: 'pointer' }}
+                        onClick={() => navigate('/session/crea-explore')} // same as Next
+>
                     Skip
                 </span>
             </div>
 
             <div style={{ flex: 1 }} />
 
+            {/* Bottom Content */}
             <div
                 style={{
                     background: 'linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0))',

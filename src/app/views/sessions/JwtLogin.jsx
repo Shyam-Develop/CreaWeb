@@ -1,68 +1,7 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import {
-  Card,
-  Checkbox,
-  Grid,
-  TextField,
-  Box,
-  styled,
-  useTheme,
-  Typography,
-  Button,
-} from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import useAuth from "app/hooks/useAuth";
-import { Paragraph } from "app/components/Typography";
-import backgroundImage from "../../../assets/photo1.jpg";
-import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-// STYLED COMPONENTS
-const FlexBox = styled(Box)(() => ({
-  display: "flex",
-}));
-
-const ContentBox = styled("div")(() => ({
-  height: "100%",
-  padding: "32px",
-  position: "relative",
-  background: "rgba(0, 0, 0, 0.01)",
-}));
-
-const StyledRoot = styled("div")(() => ({
-  backgroundImage: `url(/assets/images/meat1.jpg)`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  // backgroundColor: "#1A2038",
-  backgroundSize: "cover", // Cover the whole container
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center center",
-  minHeight: "100% !important",
-  "& .card": {
-    maxWidth: 400,
-    minHeight: 400,
-    margin: "1rem",
-    display: "flex",
-    borderRadius: 12,
-    alignItems: "center",
-  },
-
-  ".img-wrapper": {
-    height: "100%",
-    minWidth: 320,
-    display: "flex",
-    padding: "2rem 2rem 1rem 2rem",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-  },
-}));
-
-
-// form field validation schema
+import { Box, Typography, Button, IconButton } from "@mui/material";
+import { FaGoogle, FaApple } from "react-icons/fa";
+import backgroundImage from "../../../assets/photo1.jpg";
 
 export default function JwtLogin() {
   const navigate = useNavigate();
@@ -71,12 +10,16 @@ export default function JwtLogin() {
     navigate("/session/login-details");
   };
 
+  const handleSignUp = () => {
+    navigate("/session/signup-page");
+  };
+
   const handleGoogleLogin = () => {
     alert("Google login clicked!");
   };
 
-  const handleSignUp = () => {
-    navigate("/session/signup-page");
+  const handleAppleLogin = () => {
+    alert("Apple login clicked!");
   };
 
   return (
@@ -149,7 +92,7 @@ export default function JwtLogin() {
             backgroundColor: "#34A853",
             width: 200,
             borderRadius: 1,
-            mb: 2,
+            mb: 3,
             "&:hover": {
               backgroundColor: "#2c8c47",
             },
@@ -158,27 +101,46 @@ export default function JwtLogin() {
           Sign Up
         </Button>
 
-        <Box sx={{ textAlign: "center", mt: 3 }}>
-          <Typography
+        {/* "Continue with" line */}
+        <Typography
+          sx={{
+            color: "white",
+            textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
+            fontSize: 14,
+            mb: 1,
+          }}
+        >
+          Continue with
+        </Typography>
+
+        {/* Social Icons */}
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <IconButton
+            onClick={handleGoogleLogin}
             sx={{
-              color: "white",
-              textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
-              fontSize: 16,
-              mb: 1,
+              backgroundColor: "#fff",
+              border: "1px solid #ccc",
+              "&:hover": { backgroundColor: "#f1f1f1" },
+              width: 48,
+              height: 48,
             }}
           >
-            Continue with Login via Google
-          </Typography>
-          <FaGoogle
-            style={{
-              fontSize: "30px",
-              color: "#DB4437",
-              cursor: "pointer",
+            <FaGoogle style={{ color: "#DB4437", fontSize: 22 }} />
+          </IconButton>
+
+          <IconButton
+            onClick={handleAppleLogin}
+            sx={{
+              backgroundColor: "#000",
+              "&:hover": { backgroundColor: "#1a1a1a" },
+              width: 48,
+              height: 48,
             }}
-            onClick={handleGoogleLogin}
-          />
+          >
+            <FaApple style={{ color: "#fff", fontSize: 22 }} />
+          </IconButton>
         </Box>
       </Box>
     </Box>
   );
-};
+}

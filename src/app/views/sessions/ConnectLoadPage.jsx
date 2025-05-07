@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import backgroundImage from '../../../assets/pict.jpg'
+
 
 const OnboardingScreen = () => {
     const navigate = useNavigate();
@@ -11,26 +13,28 @@ const OnboardingScreen = () => {
 
     return (
         <Container
-        disableGutters
-        sx={{
-            width: '100%',
-            maxWidth: 400, 
-            mx: 'auto', 
-            backgroundImage: 'url("/background.jpg")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            minHeight: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            position: 'relative',
-            color: '#fff',
-            px: 2,
-        }}
-    >
-    
+            disableGutters
+            maxWidth={false}
+            sx={{
+                width: '100%',
+                height: '100vh',
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                position: 'relative',
+                color: '#fff',
+                px: 2,
+            }}
+        >
+
             <div style={{ position: 'absolute', top: 16, right: 16 }}>
-                <span style={{ color: '#fff', fontSize: 14, cursor: 'pointer' }}>
+                <span
+                    style={{ color: '#fff', fontSize: 14, cursor: 'pointer' }}
+                    onClick={() => navigate('/session/crea-discover')}
+                >
                     Skip
                 </span>
             </div>
@@ -64,7 +68,7 @@ const OnboardingScreen = () => {
                                 height: 10,
                                 borderRadius: '50%',
                                 backgroundColor: '#fff',
-                                opacity: index === 1 ? 1 : 0.3,
+                                opacity: index === 0 ? 1 : 0.3,
                                 margin: '0 5px',
                             }}
                         />
