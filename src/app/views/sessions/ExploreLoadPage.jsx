@@ -1,7 +1,8 @@
 import React from "react";
-import { Container, Button } from "@mui/material";
+import { Container, Button,Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../../../assets/pict.jpg'
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const Explore = () => {
     const navigate = useNavigate();
@@ -48,17 +49,17 @@ const Explore = () => {
                     textAlign: "center",
                 }}
             >
-                <h2 style={{ fontSize: 50, fontWeight: "bold", marginBottom: 8 }}>
+                <h2 style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 8 }}>
                     Explore Opportunities
                 </h2>
 
-                <p style={{ fontSize: 20, lineHeight: 1.6, marginBottom: -12 }}>
+                <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: -12 }}>
                     Use artificial intelligence techniques
                 </p>
-                <p style={{ fontSize: 20, lineHeight: 1.6, marginBottom: -12 }}>
+                <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: -12 }}>
                     to enhance, manipulate, and modify
                 </p>
-                <p style={{ fontSize: 20, lineHeight: 1.6, marginBottom: -1 }}>
+                <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: -1 }}>
                     photos in various ways
                 </p>
 
@@ -78,8 +79,28 @@ const Explore = () => {
                         />
                     ))}
                 </div>
-
-                <Button
+<Box
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end", // pushes to the right
+    cursor: "pointer",
+    gap: 1, // space between text and icon
+  }}
+    onClick={handleGetStarted}
+>
+  <Typography
+    sx={{
+      color: "white",
+      fontWeight: 900,
+      fontSize: 14,
+    }}
+  >
+    Swipe
+  </Typography>
+  <ArrowForwardIcon sx={{ color: "white", fontWeight: 900, fontSize: 18 }} />
+</Box>
+                {/* <Button
                     variant="contained"
                     fullWidth
                     sx={{
@@ -93,7 +114,7 @@ const Explore = () => {
                     onClick={handleGetStarted}
                 >
                     Get Started
-                </Button>
+                </Button> */}
             </div>
         </Container>
     );

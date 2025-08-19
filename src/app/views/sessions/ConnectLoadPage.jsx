@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Button } from '@mui/material';
+import { Container, Button,Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../../../assets/pict.jpg'
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 
 const OnboardingScreen = () => {
@@ -51,11 +52,16 @@ const OnboardingScreen = () => {
                 }}
             >
                 <h2 style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 8 }}>
-                    Connect, Create & Collaborate
+                    Discover Inspiring Content & Talent
                 </h2>
-                <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: 24 }}>
-                    Artizt Network is where you can connect with fellow creatives,
-                    collaborate on projects, and unleash your creativity
+                <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: -12 }}>
+                    Use artificial intelligence techniques
+                </p>
+                <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: -12 }}>
+                    to enhance, manipulate, and modify
+                </p>
+                <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: -1 }}>
+                    photos in various ways
                 </p>
 
                 <div style={{ marginBottom: 24 }}>
@@ -74,8 +80,28 @@ const OnboardingScreen = () => {
                         />
                     ))}
                 </div>
-
-                <Button
+<Box
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end", // pushes to the right
+    cursor: "pointer",
+    gap: 1, // space between text and icon
+  }}
+  onClick={handleNext}
+>
+  <Typography
+    sx={{
+      color: "white",
+      fontWeight: 900,
+      fontSize: 14,
+    }}
+  >
+    Swipe
+  </Typography>
+  <ArrowForwardIcon sx={{ color: "white", fontWeight: 900, fontSize: 18 }} />
+</Box>
+                {/* <Button
                     variant="contained"
                     fullWidth
                     sx={{
@@ -88,7 +114,7 @@ const OnboardingScreen = () => {
                     onClick={handleNext}
                 >
                     Next
-                </Button>
+                </Button> */}
             </div>
         </Container>
     );

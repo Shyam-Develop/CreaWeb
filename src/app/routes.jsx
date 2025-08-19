@@ -11,7 +11,8 @@ import UnderDevelopment from "./views/sessions/UnderDevelopment";
 import HomePage from "./views/Home/Home";
 import accountRoutes from "./views/Account/AccountRoutes";
 import hiringRoutes from "./views/Hiring DashBoard/Hiringroutes";
-
+import LanguageRoutes from "./views/Language/LanguageRoutes";
+import ProfileRoutes from "./views/MyProfile/ProfileRoutes";
 const routes = [
     {
       element: (
@@ -24,10 +25,13 @@ const routes = [
         // ...mastersRoutes,
         ...accountRoutes,
         ...hiringRoutes,
+        
         { path: '*', element: <UnderDevelopment /> },
       ],
     },
     ...sessionRoutes,
+    ...LanguageRoutes,
+    ...ProfileRoutes,
     // { path: '/', element: <Navigate to="/session/signin" /> },
     { path: '/', element: <Navigate to="/session/crea-load-page" /> },
     { path: '*', element: <NotFound /> },

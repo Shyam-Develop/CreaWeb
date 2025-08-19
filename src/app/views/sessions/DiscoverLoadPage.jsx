@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Button } from '@mui/material';
+import { Container, Button,Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../../../assets/pict.jpg';
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const Discover = () => {
     const navigate = useNavigate();
@@ -81,7 +82,28 @@ const Discover = () => {
                 </div>
 
                 {/* Next Button */}
-                <Button
+                <Box
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end", // pushes to the right
+    cursor: "pointer",
+    gap: 1, // space between text and icon
+  }}
+  onClick={handleNext}
+>
+  <Typography
+    sx={{
+      color: "white",
+      fontWeight: 900,
+      fontSize: 14,
+    }}
+  >
+    Swipe
+  </Typography>
+  <ArrowForwardIcon sx={{ color: "white", fontWeight: 900, fontSize: 18 }} />
+</Box>
+                {/* <Button
                     variant="contained"
                     fullWidth
                     sx={{
@@ -94,7 +116,7 @@ const Discover = () => {
                     onClick={handleNext}
                 >
                     Next
-                </Button>
+                </Button> */}
             </div>
         </Container>
     );

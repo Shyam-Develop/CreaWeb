@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { Box, Typography, Button, IconButton } from "@mui/material";
+import { Box, Typography, Button, IconButton,Divider } from "@mui/material";
 import { FaGoogle, FaApple } from "react-icons/fa";
 import backgroundImage from "../../../assets/photo1.jpg";
-
+import Googleimage from "../../../assets/Google1.jpg";
 export default function JwtLogin() {
   const navigate = useNavigate();
 
@@ -23,6 +23,7 @@ export default function JwtLogin() {
   };
 
   return (
+    
     <Box
       sx={{
         backgroundImage: `url(${backgroundImage})`,
@@ -39,35 +40,102 @@ export default function JwtLogin() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          backgroundColor: "rgba(0,0,0,0.5)",
+          // backgroundColor: "rgba(0,0,0,0.5)",
           p: 5,
           borderRadius: 2,
         }}
       >
         <Typography
-          variant="h4"
+          variant="h5"
           sx={{
             mb: 2,
+            fontWeight: 900,
             color: "white",
             textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
+               textAlign: "left",
           }}
         >
-          Welcome
+          Welcome to CREA
         </Typography>
 
         <Typography
           sx={{
             mb: 4,
-            color: "white",
-            textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
-            fontSize: 16,
-            textAlign: "center",
+            color: "#949393ff",
+            // textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
+            fontSize: 14,
+            textAlign: "left",
           }}
         >
-          Stay signed in with your account to make it easier
+         Choose how you'd like to continue
         </Typography>
 
-        <Button
+         <Box sx={{ width: "100%", maxWidth: 320, mt: 4 }}>
+       <Button
+  // onClick={handleGoogleLogin}
+  onClick={(e) => {
+      e.stopPropagation(); // prevent button click
+      handleGoogleLogin();
+    }}
+  variant="outlined"
+  fullWidth
+  startIcon={
+    <Box
+      component="img"
+      src={Googleimage}
+      alt="Google logo"
+      sx={{ width: 30, height: 30 }}
+    />
+  }
+  sx={{
+    backgroundColor: "white",
+    borderRadius: "50px",
+    textTransform: "none",
+    fontWeight: 500,
+    fontSize: 14,
+    borderColor: "#ddd",
+    height: 42,
+    "&:hover": {
+      backgroundColor: "#f8f8f8",
+      borderColor: "#ccc",
+    },
+  }}
+>
+  Continue with Google
+</Button>
+
+      </Box>
+
+
+  {/* Divider with text */}
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: 320,
+          display: "flex",
+          alignItems: "center",
+          my: 2,
+        }}
+      >
+        <Divider sx={{ flex: 1, borderColor: "#555" }} />
+        <Typography sx={{ mx: 1, color: "#aaa", fontSize: 13 }}>or</Typography>
+        <Divider sx={{ flex: 1, borderColor: "#555" }} />
+      </Box>
+
+      {/* Enter Email link */}
+      <Typography
+        sx={{
+          fontSize: 14,
+          color: "white",
+          cursor: "pointer",
+          // textDecoration: "underline",
+          "&:hover": { opacity: 0.8 },
+        }}
+        onClick={() =>  navigate("/session/login-details")}
+      >
+        Enter Email
+      </Typography>
+        {/* <Button
           variant="contained"
           fullWidth
           onClick={handleLogin}
@@ -99,10 +167,10 @@ export default function JwtLogin() {
           }}
         >
           Sign Up
-        </Button>
+        </Button> */}
 
         {/* "Continue with" line */}
-        <Typography
+        {/* <Typography
           sx={{
             color: "white",
             textShadow: "1px 1px 3px rgba(0,0,0,0.6)",
@@ -111,10 +179,10 @@ export default function JwtLogin() {
           }}
         >
           Continue with
-        </Typography>
+        </Typography> */}
 
         {/* Social Icons */}
-        <Box sx={{ display: "flex", gap: 2 }}>
+        {/* <Box sx={{ display: "flex", gap: 2 }}>
           <IconButton
             onClick={handleGoogleLogin}
             sx={{
@@ -139,7 +207,7 @@ export default function JwtLogin() {
           >
             <FaApple style={{ color: "#fff", fontSize: 22 }} />
           </IconButton>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

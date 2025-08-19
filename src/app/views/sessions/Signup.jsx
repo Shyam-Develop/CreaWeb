@@ -35,37 +35,39 @@ const SignUp = () => {
 
   return (
     <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
+      <form 
+      // onSubmit={handleSubmit} 
+      style={styles.form}>
         <div style={styles.logoContainer}>
           <img src={logo} alt="Logo" style={styles.logo} />
         </div>
 
         <h2 style={styles.heading}>Create Your Artistic Profile</h2>
 
-        {error && <p style={styles.error}>{error}</p>}
+        {/* {error && <p style={styles.error}>{error}</p>} */}
 
         <input
           type="text"
           name="fullName"
           placeholder="Name"
-          value={formData.fullName}
-          onChange={handleChange}
+          // value={formData.fullName}
+          // onChange={handleChange}
           style={styles.input}
         />
         <input
           type="email"
           name="email"
           placeholder="Email or Phone Number"
-          value={formData.email}
-          onChange={handleChange}
+          // value={formData.email}
+          // onChange={handleChange}
           style={styles.input}
         />
         <input
           type="password"
           name="password"
           placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
+          // value={formData.password}
+          // onChange={handleChange}
           style={styles.input}
         />
     

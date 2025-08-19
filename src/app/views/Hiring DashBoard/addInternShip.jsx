@@ -570,7 +570,9 @@ export default function MultiStepForm() {
                                </Stack>
 </Box>
                                 <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-                                    <Button variant="outlined" onClick={() => setStep(1)}>
+                                    <Button variant="outlined" 
+                                    // onClick={() => setStep(1)}
+                                    >
                                         Back
                                     </Button>
                                     <Button type="submit" variant="contained">
